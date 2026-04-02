@@ -1,6 +1,9 @@
 # name: test/sql/pfc.test
 # description: Tests for the pfc DuckDB extension (read_pfc_jsonl)
 # group: [pfc]
+#
+# These tests cover bind-time error handling only and do NOT require the pfc_jsonl binary.
+# All errors below are raised before any subprocess is started (index read or argument parsing).
 
 require pfc
 
@@ -16,23 +19,37 @@ SELECT * FROM read_pfc_jsonl(42);
 ----
 No function matches
 
-# ─── Error: missing .bidx file ────────────────────────────────────────────────
-# Fires before calling the PFC binary — safe to run in CI without the binary
-
-statement error
-SELECT * FROM read_pfc_jsonl('/nonexistent/path/file.pfc');
-----
-Cannot open index file
-
 # ─── Error: empty path ────────────────────────────────────────────────────────
 
 statement error
 SELECT * FROM read_pfc_jsonl('');
 ----
-Cannot open index file
+path must not be empty
 
-# ─── Named parameters: wrong type for ts_from ─────────────────────────────────
+# ─── Error: file does not exist ───────────────────────────────────────────────
+
+statement error
+SELECT * FROM read_pfc_jsonl('/nonexistent/path/file.pfc');
+----
+Cannot open PFC file
+
+# ─── Error: wrong type for ts_from ────────────────────────────────────────────
 
 statement error
 SELECT * FROM read_pfc_jsonl('/nonexistent.pfc', ts_from='not_a_number');
 ----
+No function matches
+
+# ─── Error: wrong type for ts_to ──────────────────────────────────────────────
+
+statement error
+SELECT * FROM read_pfc_jsonl('/nonexistent.pfc', ts_to='bad');
+----
+No function matches
+
+# ─── Error: unknown named parameter ───────────────────────────────────────────
+
+statement error
+SELECT * FROM read_pfc_jsonl('/nonexistent.pfc', unknown_param=1);
+----
+Named parameters
