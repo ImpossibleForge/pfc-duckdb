@@ -10,7 +10,7 @@ extension:
 
 repo:
   github: ImpossibleForge/pfc-duckdb
-  ref: PLACEHOLDER_COMMIT_SHA
+  ref: 3d68aa96de6dbbb4fd7e20fca9d41b60c5a50e79
 
 docs:
   hello_world: |
