@@ -24,18 +24,18 @@
 
 #pragma pack(push, 1)
 struct PFCBidxHeader {
-    uint8_t  magic[4];       // "PFCI"
-    uint16_t version;        // 1
-    uint32_t block_count;
-    uint8_t  reserved[6];
+	uint8_t magic[4]; // "PFCI"
+	uint16_t version; // 1
+	uint32_t block_count;
+	uint8_t reserved[6];
 };
 
 struct PFCBidxRecord {
-    uint32_t block_id;
-    uint64_t byte_offset;
-    uint32_t block_size;
-    int64_t  ts_start;       // Unix seconds (0 = unknown)
-    int64_t  ts_end;         // Unix seconds (0 = unknown)
+	uint32_t block_id;
+	uint64_t byte_offset;
+	uint32_t block_size;
+	int64_t ts_start; // Unix seconds (0 = unknown)
+	int64_t ts_end;   // Unix seconds (0 = unknown)
 };
 #pragma pack(pop)
 
@@ -44,16 +44,16 @@ static_assert(sizeof(PFCBidxHeader) == 16, "PFCBidxHeader must be 16 bytes");
 static_assert(sizeof(PFCBidxRecord) == 32, "PFCBidxRecord must be 32 bytes");
 
 struct PFCIndex {
-    std::vector<PFCBidxRecord> blocks;
+	std::vector<PFCBidxRecord> blocks;
 
-    // Read .pfc.bidx from disk. Throws std::runtime_error on failure.
-    static PFCIndex ReadFromFile(const std::string &bidx_path);
+	// Read .pfc.bidx from disk. Throws std::runtime_error on failure.
+	static PFCIndex ReadFromFile(const std::string &bidx_path);
 
-    // Return all block IDs in order.
-    std::vector<uint32_t> GetAllBlockIds() const;
+	// Return all block IDs in order.
+	std::vector<uint32_t> GetAllBlockIds() const;
 
-    // Return block IDs whose timestamp range overlaps [ts_from, ts_to].
-    // If ts_from == 0 && ts_to == 0: returns all blocks (no filter).
-    // Blocks with unknown timestamps (ts_start==0 && ts_end==0) are always included.
-    std::vector<uint32_t> GetBlocksInRange(int64_t ts_from, int64_t ts_to) const;
+	// Return block IDs whose timestamp range overlaps [ts_from, ts_to].
+	// If ts_from == 0 && ts_to == 0: returns all blocks (no filter).
+	// Blocks with unknown timestamps (ts_start==0 && ts_end==0) are always included.
+	std::vector<uint32_t> GetBlocksInRange(int64_t ts_from, int64_t ts_to) const;
 };
