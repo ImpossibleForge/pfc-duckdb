@@ -1,0 +1,38 @@
+# name: test/sql/pfc.test
+# description: Tests for the pfc DuckDB extension (read_pfc_jsonl)
+# group: [pfc]
+
+require pfc
+
+# ─── Extension loads ───────────────────────────────────────────────────────────
+
+statement ok
+SELECT 1;
+
+# ─── Error: wrong argument type ───────────────────────────────────────────────
+
+statement error
+SELECT * FROM read_pfc_jsonl(42);
+----
+No function matches
+
+# ─── Error: missing .bidx file ────────────────────────────────────────────────
+# Fires before calling the PFC binary — safe to run in CI without the binary
+
+statement error
+SELECT * FROM read_pfc_jsonl('/nonexistent/path/file.pfc');
+----
+Cannot open index file
+
+# ─── Error: empty path ────────────────────────────────────────────────────────
+
+statement error
+SELECT * FROM read_pfc_jsonl('');
+----
+Cannot open index file
+
+# ─── Named parameters: wrong type for ts_from ─────────────────────────────────
+
+statement error
+SELECT * FROM read_pfc_jsonl('/nonexistent.pfc', ts_from='not_a_number');
+----

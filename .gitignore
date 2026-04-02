@@ -1,8 +1,9 @@
-build
-.idea
-cmake-build-debug
-duckdb_unittest_tempdir/
+build/
+duckdb/
+extension-ci-tools/
+*.duckdb_extension
+*.a
+*.so
+*.dylib
+*.dll
 .DS_Store
-testext
-test/python/__pycache__/
-.Rhistory
