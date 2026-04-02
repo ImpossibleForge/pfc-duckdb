@@ -1,11 +1,31 @@
-# Testing this extension
-This directory contains all the tests for this extension. The `sql` directory holds tests that are written as [SQLLogicTests](https://duckdb.org/dev/sqllogictest/intro.html). DuckDB aims to have most its tests in this format as SQL statements, so for the quack extension, this should probably be the goal too.
+# Tests
 
-The root makefile contains targets to build and run all of these tests. To run the SQLLogicTests:
+## SQL logic tests (CI-safe, no binary required)
+
+Located in `test/sql/pfc.test`. Run with:
+
 ```bash
-make test
+build/release/test/unittest "test/sql/pfc.test"
 ```
-or 
+
+These tests only cover error handling (missing file, wrong types) and do not require the `pfc_jsonl` binary.
+
+## Local integration tests (requires pfc_jsonl binary)
+
 ```bash
-make test_debug
+bash test/test_local.sh
+# Expected: 9 passed, 0 failed
 ```
+
+Tests cover:
+- Row count from fixture (10 rows)
+- JSON format of output lines
+- `ts_from`/`ts_to` block filtering (0 rows when block excluded, 10 rows when included)
+- Missing `.bidx` error message
+
+## Test fixtures
+
+`test/fixtures/fixture.pfc` — 10 JSON lines, 1 block, timestamps from 2026-01-01.
+`test/fixtures/fixture.pfc.bidx` — corresponding binary block index.
+
+Generated with: `pfc_jsonl compress fixture.jsonl fixture.pfc`
