@@ -10,7 +10,7 @@ extension:
 
 repo:
   github: ImpossibleForge/pfc-duckdb
-  ref: 3d68aa96de6dbbb4fd7e20fca9d41b60c5a50e79
+  ref: 7a77d69f6931e7f8e9c069385f3c9739b0ef9429
 
 docs:
   hello_world: |
@@ -53,7 +53,8 @@ docs:
     for block decompression. Install once:
 
     ```bash
-    pip install pfc-jsonl
+    curl -L https://github.com/ImpossibleForge/pfc-jsonl/releases/latest/download/pfc_jsonl-linux-x64 \
+         -o /usr/local/bin/pfc_jsonl && chmod +x /usr/local/bin/pfc_jsonl
     ```
 
     The binary is expected at `/usr/local/bin/pfc_jsonl`.
