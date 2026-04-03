@@ -1,6 +1,7 @@
 # name: test/sql/pfc.test
 # description: Tests for the pfc DuckDB extension (read_pfc_jsonl)
-# group: [pfc]
+# group: [sql]
+
 #
 # These tests cover bind-time error handling only and do NOT require the pfc_jsonl binary.
 # All errors below are raised before any subprocess is started (index read or argument parsing).
