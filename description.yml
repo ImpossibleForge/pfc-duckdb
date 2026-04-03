@@ -10,7 +10,7 @@ extension:
 
 repo:
   github: ImpossibleForge/pfc-duckdb
-  ref: 0f164bb9815a2235fab46a24547f6bdf72111aee
+  ref: a6b84a8d44f437bf6ebba68f7a22c8b8b310b47a
 
 docs:
   hello_world: |
@@ -57,18 +57,20 @@ docs:
       A 1-hour query on a 30-day file with hourly blocks reads ~1/720 of the data (~720× speedup).
 
     - **Community Mode — no account, no signup, no phone-home.**
-      The PFC-JSONL binary ships with a built-in free tier: **5 GB of decompressed output per
-      UTC day**, tracked locally in `~/.pfc/usage.json`. Nothing leaves your machine.
+      The PFC-JSONL binary ships with a built-in free tier: **5 GB per UTC day** for compress,
+      decompress, and query — tracked locally in `~/.pfc/usage.json`. Nothing leaves your machine.
+      For production workloads (>5 GB/day), contact impossibleforge@gmail.com for a license.
 
     - **Simple API**: one column `line VARCHAR` per row (raw JSON string).
       Combine with DuckDB's built-in `json` extension for field extraction and analytics.
 
-    - **Linux and macOS only.** Windows users: use WSL2.
+    - **Linux x86_64** binary available now. macOS coming soon.
+      Windows users: use WSL2.
 
     ## Requirements
 
     The extension calls the [PFC-JSONL binary](https://github.com/ImpossibleForge/pfc-jsonl)
-    (v3.4+) for block decompression. Install once:
+    (v3.4+) for block decompression. Install once (Linux x86_64):
 
     ```bash
     curl -L https://github.com/ImpossibleForge/pfc-jsonl/releases/latest/download/pfc_jsonl-linux-x64 \
@@ -77,6 +79,7 @@ docs:
 
     The binary is expected at `/usr/local/bin/pfc_jsonl`.
     Override with the `PFC_JSONL_BINARY` environment variable.
+    macOS binary coming soon — contact impossibleforge@gmail.com for early access.
 
     ## File Format
 
