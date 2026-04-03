@@ -297,6 +297,13 @@ std::string PfcExtension::Version() const {
 
 } // namespace duckdb
 
+// extern "C" is required so that the symbol is exported without C++ name
+// mangling.  macOS's linker verifies the symbol _pfc_duckdb_cpp_init (C
+// linkage) via -Wl,-exported_symbol; without extern "C" the symbol gets
+// mangled to _Z19pfc_duckdb_cpp_initRN6duckdb15ExtensionLoaderE and the
+// link step fails on macOS and Wasm.
+extern "C" {
 DUCKDB_CPP_EXTENSION_ENTRY(pfc, loader) {
 	duckdb::LoadInternal(loader);
+}
 }
