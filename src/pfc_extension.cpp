@@ -8,7 +8,9 @@
 #include <stdexcept>
 #include <cstdio>
 #include <cstdlib>
+#if !defined(_WIN32) && !defined(__EMSCRIPTEN__)
 #include <sys/wait.h> // WIFEXITED / WEXITSTATUS (Linux + macOS)
+#endif
 
 namespace duckdb {
 
@@ -25,6 +27,8 @@ static std::string FindPFCBinary() {
 // Escape a string for safe use as a single shell argument.
 // Wraps in single quotes and replaces any embedded ' with '\''.
 // This is safe for /bin/sh on Linux and macOS.
+// Only compiled on POSIX platforms where popen() is available.
+#if !defined(_WIN32) && !defined(__EMSCRIPTEN__)
 static std::string ShellEscape(const std::string &s) {
 	std::string out = "'";
 	for (char c : s) {
@@ -58,6 +62,7 @@ struct PipeGuard {
 		return rc;
 	}
 };
+#endif // !_WIN32 && !__EMSCRIPTEN__
 
 // ─── Table function state ─────────────────────────────────────────────────────
 
@@ -76,6 +81,21 @@ struct PFCGlobalState : public GlobalTableFunctionState {
 };
 
 // ─── Block decompression via subprocess ──────────────────────────────────────
+
+// popen/pclose + WIFEXITED/WEXITSTATUS are POSIX-only and not available on
+// Windows or WebAssembly.  We compile a stub on those platforms so that the
+// extension links; at runtime the stub throws an informative error before any
+// subprocess call is made.
+
+#if defined(_WIN32) || defined(__EMSCRIPTEN__)
+
+static std::vector<std::string> CallPFCSeekBlocks(const std::string & /*binary*/, const std::string & /*pfc_path*/,
+                                                  const std::vector<uint32_t> & /*block_ids*/) {
+	throw std::runtime_error("pfc extension: subprocess decompression is not supported on this platform. "
+	                         "Windows users: please use WSL2.");
+}
+
+#else // Linux + macOS
 
 static std::vector<std::string> CallPFCSeekBlocks(const std::string &binary, const std::string &pfc_path,
                                                   const std::vector<uint32_t> &block_ids) {
@@ -142,6 +162,8 @@ static std::vector<std::string> CallPFCSeekBlocks(const std::string &binary, con
 
 	return result;
 }
+
+#endif // !_WIN32 && !__EMSCRIPTEN__
 
 // ─── Bind ─────────────────────────────────────────────────────────────────────
 
