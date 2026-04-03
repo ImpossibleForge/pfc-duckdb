@@ -227,7 +227,7 @@ The PFC binary includes a built-in Community Mode — **no account, no signup re
 
 |                    | Community                        | Licensed        |
 |--------------------|----------------------------------|-----------------|
-| Daily limit        | 5 GB decompressed output / day   | Unlimited       |
+| Daily limit        | 5 GB data processed / day        | Unlimited       |
 | License key        | not required                     | required        |
 | Phone home         | never                            | never           |
 | Commercial use     | allowed                          | allowed         |
@@ -235,8 +235,8 @@ The PFC binary includes a built-in Community Mode — **no account, no signup re
 
 Usage is tracked locally in `~/.pfc/usage.json`. Nothing leaves your machine.
 
-> **Note:** The 5 GB limit applies to **decompressed output bytes** (not the compressed file size).
-> For most log-analysis workloads this is more than sufficient per query session.
+> **Note:** The 5 GB daily limit counts **input bytes for compress** and **decompressed output bytes for decompress/query/seek-blocks**.
+> For most log-analysis workloads this is more than sufficient per session.
 
 For a license key: [impossibleforge@gmail.com](mailto:impossibleforge@gmail.com)
 
@@ -249,7 +249,7 @@ pfc_jsonl compress input.jsonl output.pfc
 ```
 
 **`PFC Community Mode daily limit reached`**
-Community Mode daily limit exceeded (5 GB decompressed / UTC day). Wait until midnight UTC, or [get a license](mailto:impossibleforge@gmail.com).
+Community Mode daily limit exceeded (5 GB data processed / UTC day). Wait until midnight UTC, or [get a license](mailto:impossibleforge@gmail.com).
 
 **`PFC binary not found at '/usr/local/bin/pfc_jsonl'`**
 Binary is missing or not executable. Re-run the curl install command, or set `PFC_JSONL_BINARY=/path/to/pfc_jsonl`.
