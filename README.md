@@ -2,7 +2,7 @@
 
 Query compressed PFC-JSONL log files directly in DuckDB — no decompression step, no intermediate files.
 
-> **Platform:** Linux and macOS only. Windows users: use WSL2.
+> **Platform:** Linux x86_64 available now. macOS coming soon. Windows users: use WSL2.
 
 ```sql
 INSTALL pfc FROM community;
@@ -68,12 +68,7 @@ chmod +x /usr/local/bin/pfc_jsonl
 pfc_jsonl --version   # verify
 ```
 
-**macOS (ARM/Intel):**
-```bash
-curl -L https://github.com/ImpossibleForge/pfc-jsonl/releases/latest/download/pfc_jsonl-macos \
-     -o /usr/local/bin/pfc_jsonl
-chmod +x /usr/local/bin/pfc_jsonl
-```
+> **macOS:** Binary coming soon — contact **impossibleforge@gmail.com** for early access.
 
 > **Custom path:** Set `PFC_JSONL_BINARY=/path/to/pfc_jsonl` in your environment to override the default `/usr/local/bin/pfc_jsonl`.
 
@@ -260,7 +255,7 @@ Community Mode daily limit exceeded (5 GB decompressed / UTC day). Wait until mi
 Binary is missing or not executable. Re-run the curl install command, or set `PFC_JSONL_BINARY=/path/to/pfc_jsonl`.
 
 **`popen() failed — could not start PFC binary subprocess`**
-The extension uses `popen()` to call the PFC binary. Windows is not supported — use WSL2 or a Linux/macOS machine.
+The extension uses `popen()` to call the PFC binary. Windows is not supported — use WSL2 or a Linux machine (macOS binary coming soon).
 
 **`ts_from (...) must be <= ts_to (...)`**
 You passed an inverted time range. Swap the values so `ts_from` comes before `ts_to`.
