@@ -65,7 +65,7 @@ Download the latest release for your platform:
 curl -L https://github.com/ImpossibleForge/pfc-jsonl/releases/latest/download/pfc_jsonl-linux-x64 \
      -o /usr/local/bin/pfc_jsonl
 chmod +x /usr/local/bin/pfc_jsonl
-pfc_jsonl --version   # verify
+pfc_jsonl --help      # verify install
 ```
 
 > **macOS:** Binary coming soon — contact **impossibleforge@gmail.com** for early access.
