@@ -2,7 +2,7 @@
 
 Query compressed PFC-JSONL log files directly in DuckDB — no decompression step, no intermediate files.
 
-> **Platform:** Linux x86_64 available now. macOS coming soon. Windows users: use WSL2.
+> **Platform:** Linux x86_64 only. macOS binary coming soon. No native Windows binary — Windows users must use WSL2 or a Linux machine.
 > **Status:** Submitted to DuckDB community extensions — pending review ([PR #1679](https://github.com/duckdb/community-extensions/pull/1679)). Once merged:
 
 ```sql
@@ -244,7 +244,7 @@ Usage is tracked locally in `~/.pfc/usage.json`. Nothing leaves your machine.
 > **Note:** The 5 GB daily limit counts **input bytes for compress** and **decompressed output bytes for decompress/query/seek-blocks**.
 > For most log-analysis workloads this is more than sufficient per session.
 
-For a license key: [impossibleforge@gmail.com](mailto:impossibleforge@gmail.com)
+For a production license (unlimited throughput): [impossibleforge@gmail.com](mailto:impossibleforge@gmail.com)
 
 ## Troubleshooting
 
