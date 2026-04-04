@@ -266,6 +266,16 @@ The extension uses `popen()` to call the PFC binary. Windows is not supported �
 **`ts_from (...) must be <= ts_to (...)`**
 You passed an inverted time range. Swap the values so `ts_from` comes before `ts_to`.
 
+## Related Projects
+
+| Project | Description |
+|---------|-------------|
+| [pfc-jsonl](https://github.com/ImpossibleForge/pfc-jsonl) | The core binary — compress, decompress, query |
+| [pfc-fluentbit](https://github.com/ImpossibleForge/pfc-fluentbit) | Stream Fluent Bit logs directly to `.pfc` archives |
+| [pfc-jsonl (PyPI)](https://pypi.org/project/pfc-jsonl/) | Python package — `pip install pfc-jsonl` |
+
+---
+
 ## License
 
 The **pfc DuckDB extension** (this repository) is released under the **MIT License** — see [LICENSE](LICENSE).
