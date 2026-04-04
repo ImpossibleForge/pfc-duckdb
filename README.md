@@ -3,8 +3,10 @@
 Query compressed PFC-JSONL log files directly in DuckDB — no decompression step, no intermediate files.
 
 > **Platform:** Linux x86_64 available now. macOS coming soon. Windows users: use WSL2.
+> **Status:** Submitted to DuckDB community extensions — pending review ([PR #1679](https://github.com/duckdb/community-extensions/pull/1679)). Once merged:
 
 ```sql
+-- Once available in DuckDB community extensions:
 INSTALL pfc FROM community;
 LOAD pfc;
 LOAD json;
@@ -74,12 +76,16 @@ pfc_jsonl --help      # verify install
 
 ### Step 2 — Install the DuckDB extension
 
+> **Pending:** The extension is submitted to DuckDB community extensions ([PR #1679](https://github.com/duckdb/community-extensions/pull/1679)) and will be available once merged.
+> Until then, build from source (see below).
+
 ```sql
+-- Once available (after PR merge):
 INSTALL pfc FROM community;
 LOAD pfc;
 ```
 
-### Build from source (developers)
+### Build from source (developers / early access)
 
 ```bash
 git clone --recurse-submodules https://github.com/ImpossibleForge/pfc-duckdb
