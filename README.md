@@ -26,7 +26,7 @@ Key properties:
 - Each file is split into independently compressible blocks
 - A `.pfc.bidx` binary index stores the byte offset and timestamp range of every block
 - The PFC binary can decompress any subset of blocks in a single call
-- **Community Mode: 5 GB/day free, no license key required**
+- **Free for personal and open-source use** — no account, no signup required
 
 ## How It Works (Architecture)
 
@@ -227,24 +227,11 @@ Example: 30-day log file, 720 hourly blocks — a 1-hour query reads **1 block**
 | 1 day       | ~24/720     | ~30×                     |
 | 1 hour      | ~1/720      | ~720×                    |
 
-## Community Mode vs. Licensed
+## License
 
-The PFC binary includes a built-in Community Mode — **no account, no signup required**:
+The PFC-JSONL binary is **free for personal and open-source use** — no account, no signup, no phone-home.
 
-|                    | Community                        | Licensed        |
-|--------------------|----------------------------------|-----------------|
-| Daily limit        | 5 GB data processed / day        | Unlimited       |
-| License key        | not required                     | required        |
-| Phone home         | never                            | never           |
-| Commercial use     | allowed                          | allowed         |
-| Counter reset      | midnight UTC                     | —               |
-
-Usage is tracked locally in `~/.pfc/usage.json`. Nothing leaves your machine.
-
-> **Note:** The 5 GB daily limit counts **input bytes for compress** and **decompressed output bytes for decompress/query/seek-blocks**.
-> For most log-analysis workloads this is more than sufficient per session.
-
-For a production license (unlimited throughput): [impossibleforge@gmail.com](mailto:impossibleforge@gmail.com)
+Commercial use requires a license. Contact: [impossibleforge@gmail.com](mailto:impossibleforge@gmail.com)
 
 ## Troubleshooting
 
@@ -254,8 +241,6 @@ The `.pfc.bidx` index is missing. Compress with PFC-JSONL v3.4+:
 pfc_jsonl compress input.jsonl output.pfc
 ```
 
-**`PFC Community Mode daily limit reached`**
-Community Mode daily limit exceeded (5 GB data processed / UTC day). Wait until midnight UTC, or [get a license](mailto:impossibleforge@gmail.com).
 
 **`PFC binary not found at '/usr/local/bin/pfc_jsonl'`**
 Binary is missing or not executable. Re-run the curl install command, or set `PFC_JSONL_BINARY=/path/to/pfc_jsonl`.
@@ -280,4 +265,4 @@ You passed an inverted time range. Swap the values so `ts_from` comes before `ts
 
 The **pfc DuckDB extension** (this repository) is released under the **MIT License** — see [LICENSE](LICENSE).
 
-The **PFC-JSONL binary** (`pfc_jsonl`) is **proprietary software** — it contains the closed-source compression/decompression engine. Community Mode provides 5 GB/day free. Commercial licenses available at [impossibleforge@gmail.com](mailto:impossibleforge@gmail.com).
+The **PFC-JSONL binary** (`pfc_jsonl`) is proprietary software — free for personal and open-source use. Commercial use requires a license: [impossibleforge@gmail.com](mailto:impossibleforge@gmail.com)
