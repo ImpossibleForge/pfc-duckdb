@@ -42,34 +42,41 @@ static std::string ShellEscape(const std::string &s) {
 	return out;
 }
 
-
 // Check that a line is a valid complete JSON object (starts with '{', ends with '}')
 // and contains no invalid UTF-8 byte sequences.
 // Used to drop block-boundary artifact lines from seek-blocks output.
 static bool IsValidJsonLine(const std::string &s) {
 	if (s.empty() || s.front() != '{' || s.back() != '}') {
-		return false;  // incomplete or non-object line
+		return false; // incomplete or non-object line
 	}
 	const auto *bytes = reinterpret_cast<const unsigned char *>(s.data());
 	size_t len = s.size();
 	size_t i = 0;
 	while (i < len) {
-		if (bytes[i] < 0x80) { ++i; continue; }
-		if (bytes[i] < 0xC2) return false;
+		if (bytes[i] < 0x80) {
+			++i;
+			continue;
+		}
+		if (bytes[i] < 0xC2)
+			return false;
 		if (bytes[i] < 0xE0) {
-			if (i + 1 >= len || (bytes[i + 1] & 0xC0) != 0x80) return false;
-			i += 2; continue;
+			if (i + 1 >= len || (bytes[i + 1] & 0xC0) != 0x80)
+				return false;
+			i += 2;
+			continue;
 		}
 		if (bytes[i] < 0xF0) {
-			if (i + 2 >= len || (bytes[i + 1] & 0xC0) != 0x80 ||
-			                    (bytes[i + 2] & 0xC0) != 0x80) return false;
-			i += 3; continue;
+			if (i + 2 >= len || (bytes[i + 1] & 0xC0) != 0x80 || (bytes[i + 2] & 0xC0) != 0x80)
+				return false;
+			i += 3;
+			continue;
 		}
 		if (bytes[i] < 0xF5) {
-			if (i + 3 >= len || (bytes[i + 1] & 0xC0) != 0x80 ||
-			                    (bytes[i + 2] & 0xC0) != 0x80 ||
-			                    (bytes[i + 3] & 0xC0) != 0x80) return false;
-			i += 4; continue;
+			if (i + 3 >= len || (bytes[i + 1] & 0xC0) != 0x80 || (bytes[i + 2] & 0xC0) != 0x80 ||
+			    (bytes[i + 3] & 0xC0) != 0x80)
+				return false;
+			i += 4;
+			continue;
 		}
 		return false;
 	}
