@@ -42,6 +42,40 @@ static std::string ShellEscape(const std::string &s) {
 	return out;
 }
 
+
+// Check that a line is a valid complete JSON object (starts with '{', ends with '}')
+// and contains no invalid UTF-8 byte sequences.
+// Used to drop block-boundary artifact lines from seek-blocks output.
+static bool IsValidJsonLine(const std::string &s) {
+	if (s.empty() || s.front() != '{' || s.back() != '}') {
+		return false;  // incomplete or non-object line
+	}
+	const auto *bytes = reinterpret_cast<const unsigned char *>(s.data());
+	size_t len = s.size();
+	size_t i = 0;
+	while (i < len) {
+		if (bytes[i] < 0x80) { ++i; continue; }
+		if (bytes[i] < 0xC2) return false;
+		if (bytes[i] < 0xE0) {
+			if (i + 1 >= len || (bytes[i + 1] & 0xC0) != 0x80) return false;
+			i += 2; continue;
+		}
+		if (bytes[i] < 0xF0) {
+			if (i + 2 >= len || (bytes[i + 1] & 0xC0) != 0x80 ||
+			                    (bytes[i + 2] & 0xC0) != 0x80) return false;
+			i += 3; continue;
+		}
+		if (bytes[i] < 0xF5) {
+			if (i + 3 >= len || (bytes[i + 1] & 0xC0) != 0x80 ||
+			                    (bytes[i + 2] & 0xC0) != 0x80 ||
+			                    (bytes[i + 3] & 0xC0) != 0x80) return false;
+			i += 4; continue;
+		}
+		return false;
+	}
+	return true;
+}
+
 // RAII wrapper for FILE* returned by popen().
 // Ensures pclose() is called even if an exception is thrown inside the read loop.
 struct PipeGuard {
@@ -135,6 +169,19 @@ static std::vector<std::string> CallPFCSeekBlocks(const std::string &binary, con
 		result.push_back(std::move(current_line));
 	}
 
+	// Filter out block-boundary artifact lines (incomplete preprocessing tokens).
+	// The PFC binary (v3.4.4+) also trims these, but this is a defensive layer.
+	{
+		std::vector<std::string> filtered;
+		filtered.reserve(result.size());
+		for (auto &line : result) {
+			if (IsValidJsonLine(line)) {
+				filtered.push_back(std::move(line));
+			}
+		}
+		result = std::move(filtered);
+	}
+
 	int rc = guard.close();
 	if (rc != 0) {
 		// Decode the raw waitpid status to the actual process exit code.
@@ -151,10 +198,9 @@ static std::vector<std::string> CallPFCSeekBlocks(const std::string &binary, con
 			                         "Or set: export PFC_JSONL_BINARY=/path/to/pfc_jsonl");
 		}
 		if (exit_code == 1) {
-			// PFC Community Mode daily limit exceeded (5 GB decompressed / UTC day)
-			throw std::runtime_error("PFC Community Mode daily limit reached (5 GB decompressed / day).\n"
-			                         "Wait until midnight UTC, or get an unlimited license: "
-			                         "https://github.com/ImpossibleForge/pfc-jsonl");
+			throw std::runtime_error("PFC binary returned an error. "
+			                         "Verify PFC-JSONL v3.4+ is installed:\n"
+			                         "  https://github.com/ImpossibleForge/pfc-jsonl/releases/latest");
 		}
 		throw std::runtime_error("PFC binary exited with code " + std::to_string(exit_code) +
 		                         " — verify PFC-JSONL v3.4+ is installed and the .pfc file is not corrupt");
