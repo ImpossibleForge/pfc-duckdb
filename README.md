@@ -1,7 +1,11 @@
 # pfc — DuckDB Extension for PFC-JSONL
 
-Query compressed PFC-JSONL log files directly in DuckDB — no decompression step, no intermediate files.
+You have compressed log archives on disk. To query them you normally decompress everything first — even if you only need one hour out of thirty days.
 
+This extension changes that. Query `.pfc` files directly from DuckDB SQL. A block index tells the extension exactly which chunks of the file to decompress — the rest stays compressed.
+
+> **Requires:** The `pfc_jsonl` binary installed on your machine (Step 1 below). The extension calls it for decompression.
+>
 > **Platform:** Linux x86_64 only. macOS binary coming soon. No native Windows binary — Windows users must use WSL2 or a Linux machine.
 
 ```sql
