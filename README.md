@@ -262,6 +262,6 @@ You passed an inverted time range. Swap the values so `ts_from` comes before `ts
 
 ## License
 
-The **pfc DuckDB extension** (this repository) is released under the **MIT License** — see [LICENSE](LICENSE).
+The **pfc DuckDB extension** (this repository) is released under the **MIT License** — see [LICENSE](https://github.com/ImpossibleForge/pfc-duckdb/blob/main/LICENSE).
 
 The **PFC-JSONL binary** (`pfc_jsonl`) is proprietary software — free for personal and open-source use. Commercial use requires a license: [impossibleforge@gmail.com](mailto:impossibleforge@gmail.com)
