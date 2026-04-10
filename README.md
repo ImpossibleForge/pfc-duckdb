@@ -72,7 +72,7 @@ chmod +x /usr/local/bin/pfc_jsonl
 pfc_jsonl --help      # verify install
 ```
 
-> **macOS:** Binary coming soon — contact **impossibleforge@gmail.com** for early access.
+> **macOS:** Binary coming soon — contact **info@impossibleforge.com** for early access.
 
 > **Custom path:** Set `PFC_JSONL_BINARY=/path/to/pfc_jsonl` in your environment to override the default `/usr/local/bin/pfc_jsonl`.
 
@@ -229,7 +229,7 @@ Example: 30-day log file, 720 hourly blocks — a 1-hour query reads **1 block**
 
 The PFC-JSONL binary is **free for personal and open-source use** — no account, no signup, no phone-home.
 
-Commercial use requires a license. Contact: [impossibleforge@gmail.com](mailto:impossibleforge@gmail.com)
+Commercial use requires a license. Contact: [info@impossibleforge.com](mailto:info@impossibleforge.com)
 
 ## Troubleshooting
 
@@ -264,4 +264,4 @@ You passed an inverted time range. Swap the values so `ts_from` comes before `ts
 
 The **pfc DuckDB extension** (this repository) is released under the **MIT License** — see [LICENSE](https://github.com/ImpossibleForge/pfc-duckdb/blob/main/LICENSE).
 
-The **PFC-JSONL binary** (`pfc_jsonl`) is proprietary software — free for personal and open-source use. Commercial use requires a license: [impossibleforge@gmail.com](mailto:impossibleforge@gmail.com)
+The **PFC-JSONL binary** (`pfc_jsonl`) is proprietary software — free for personal and open-source use. Commercial use requires a license: [info@impossibleforge.com](mailto:info@impossibleforge.com)
