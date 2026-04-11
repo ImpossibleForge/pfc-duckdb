@@ -20,6 +20,8 @@ FROM read_pfc_jsonl('/var/log/events.pfc')
 WHERE line->>'$.level' = 'ERROR';
 ```
 
+[![Awesome DuckDB](https://awesome.re/mentioned-badge.svg)](https://github.com/davidgasquez/awesome-duckdb)
+
 ## What is PFC-JSONL?
 
 [PFC-JSONL](https://github.com/ImpossibleForge/pfc-jsonl) is a high-performance compressed log format built for structured (JSONL) data. It achieves **better compression than gzip and zstd** on real log data while supporting **random block access** — meaning you can decompress only the time range you need.
