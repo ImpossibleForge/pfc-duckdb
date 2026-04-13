@@ -6,7 +6,7 @@ This extension changes that. Query `.pfc` files directly from DuckDB SQL. A bloc
 
 > **Requires:** The `pfc_jsonl` binary installed on your machine (Step 1 below). The extension calls it for decompression.
 >
-> **Platform:** Linux x86_64 only. macOS binary coming soon. No native Windows binary — Windows users must use WSL2 or a Linux machine.
+> **Platform:** Linux x86_64 and macOS Apple Silicon (ARM64). No native Windows binary — Windows users must use WSL2 or a Linux machine.
 
 ```sql
 INSTALL pfc FROM community;
@@ -74,7 +74,15 @@ chmod +x /usr/local/bin/pfc_jsonl
 pfc_jsonl --help      # verify install
 ```
 
-> **macOS:** Binary coming soon — contact **info@impossibleforge.com** for early access.
+**macOS (Apple Silicon M1/M2/M3/M4):**
+```bash
+curl -L https://github.com/ImpossibleForge/pfc-jsonl/releases/latest/download/pfc_jsonl-macos-arm64 \
+     -o /usr/local/bin/pfc_jsonl
+chmod +x /usr/local/bin/pfc_jsonl
+pfc_jsonl --help      # verify install
+```
+
+> **macOS Intel (x64):** Binary coming soon.
 
 > **Custom path:** Set `PFC_JSONL_BINARY=/path/to/pfc_jsonl` in your environment to override the default `/usr/local/bin/pfc_jsonl`.
 
@@ -246,7 +254,7 @@ pfc_jsonl compress input.jsonl output.pfc
 Binary is missing or not executable. Re-run the curl install command, or set `PFC_JSONL_BINARY=/path/to/pfc_jsonl`.
 
 **`popen() failed — could not start PFC binary subprocess`**
-The extension uses `popen()` to call the PFC binary. Windows is not supported — use WSL2 or a Linux machine (macOS binary coming soon).
+The extension uses `popen()` to call the PFC binary. Windows is not supported — use WSL2 or a Linux machine.
 
 **`ts_from (...) must be <= ts_to (...)`**
 You passed an inverted time range. Swap the values so `ts_from` comes before `ts_to`.
