@@ -7,3 +7,6 @@ extension-ci-tools/
 *.dylib
 *.dll
 .DS_Store
+*.pfc
+.env
+__pycache__/
