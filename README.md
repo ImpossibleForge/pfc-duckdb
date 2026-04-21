@@ -267,6 +267,7 @@ You passed an inverted time range. Swap the values so `ts_from` comes before `ts
 | [pfc-fluentbit](https://github.com/ImpossibleForge/pfc-fluentbit) | Stream Fluent Bit logs directly to `.pfc` archives |
 | [pfc-migrate](https://github.com/ImpossibleForge/pfc-migrate) | Convert existing gzip/zstd/lz4 archives to PFC — local, S3, Azure, GCS |
 | [pfc-jsonl (PyPI)](https://pypi.org/project/pfc-jsonl/) | Python package — `pip install pfc-jsonl` |
+| [pfc-vector](https://github.com/ImpossibleForge/pfc-vector) | High-performance Rust ingest daemon for Vector.dev and Telegraf |
 
 ---
 
