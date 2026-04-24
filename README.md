@@ -235,6 +235,12 @@ Example: 30-day log file, 720 hourly blocks — a 1-hour query reads **1 block**
 | 1 day       | ~24/720     | ~30×                     |
 | 1 hour      | ~1/720      | ~720×                    |
 
+
+---
+
+## Disclaimer
+
+PFC-DuckDB is an independent open-source project and is not affiliated with, endorsed by, or associated with the DuckDB Foundation or DuckDB Labs.
 ## License
 
 The PFC-JSONL binary is **free for personal and open-source use** — no account, no signup, no phone-home.
