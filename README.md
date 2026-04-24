@@ -269,6 +269,7 @@ You passed an inverted time range. Swap the values so `ts_from` comes before `ts
 | [pfc-jsonl (PyPI)](https://pypi.org/project/pfc-jsonl/) | Python package — `pip install pfc-jsonl` |
 | [pfc-vector](https://github.com/ImpossibleForge/pfc-vector) | High-performance Rust ingest daemon for Vector.dev and Telegraf |
 | [pfc-otel-collector](https://github.com/ImpossibleForge/pfc-otel-collector) | OpenTelemetry OTLP/HTTP log exporter |
+| [pfc-kafka-consumer](https://github.com/ImpossibleForge/pfc-kafka-consumer) | Kafka / Redpanda consumer |
 
 ---
 
