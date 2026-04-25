@@ -276,6 +276,8 @@ You passed an inverted time range. Swap the values so `ts_from` comes before `ts
 | [pfc-vector](https://github.com/ImpossibleForge/pfc-vector) | High-performance Rust ingest daemon for Vector.dev and Telegraf |
 | [pfc-otel-collector](https://github.com/ImpossibleForge/pfc-otel-collector) | OpenTelemetry OTLP/HTTP log exporter |
 | [pfc-kafka-consumer](https://github.com/ImpossibleForge/pfc-kafka-consumer) | Kafka / Redpanda consumer |
+| [pfc-telegraf](https://github.com/ImpossibleForge/pfc-telegraf) | Telegraf HTTP output plugin → PFC |
+| [pfc-grafana](https://github.com/ImpossibleForge/pfc-grafana) | Grafana data source plugin for PFC archives |
 
 ---
 
