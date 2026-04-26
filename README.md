@@ -236,16 +236,7 @@ Example: 30-day log file, 720 hourly blocks — a 1-hour query reads **1 block**
 | 1 hour      | ~1/720      | ~720×                    |
 
 
----
 
-## Disclaimer
-
-PFC-DuckDB is an independent open-source project and is not affiliated with, endorsed by, or associated with the DuckDB Foundation or DuckDB Labs.
-## License
-
-The PFC-JSONL binary is **free for personal and open-source use** — no account, no signup, no phone-home.
-
-Commercial use requires a license. Contact: [info@impossibleforge.com](mailto:info@impossibleforge.com)
 
 ## Troubleshooting
 
@@ -270,6 +261,7 @@ You passed an inverted time range. Swap the values so `ts_from` comes before `ts
 | Project | Description |
 |---------|-------------|
 | [pfc-jsonl](https://github.com/ImpossibleForge/pfc-jsonl) | The core binary — compress, decompress, query |
+| [pfc-gateway](https://github.com/ImpossibleForge/pfc-gateway) | HTTP query + ingest API for .pfc archives — enables Grafana and remote access |
 | [pfc-fluentbit](https://github.com/ImpossibleForge/pfc-fluentbit) | Stream Fluent Bit logs directly to `.pfc` archives |
 | [pfc-migrate](https://github.com/ImpossibleForge/pfc-migrate) | Convert existing gzip/zstd/lz4 archives to PFC — local, S3, Azure, GCS |
 | [pfc-jsonl (PyPI)](https://pypi.org/project/pfc-jsonl/) | Python package — `pip install pfc-jsonl` |
@@ -280,6 +272,10 @@ You passed an inverted time range. Swap the values so `ts_from` comes before `ts
 | [pfc-grafana](https://github.com/ImpossibleForge/pfc-grafana) | Grafana data source plugin for PFC archives |
 
 ---
+
+## Disclaimer
+
+PFC-DuckDB is an independent open-source project and is not affiliated with, endorsed by, or associated with the DuckDB Foundation or DuckDB Labs.
 
 ## License
 
