@@ -261,20 +261,13 @@ The extension uses `popen()` to call the PFC binary. Windows is not supported �
 **`ts_from (...) must be <= ts_to (...)`**
 You passed an inverted time range. Swap the values so `ts_from` comes before `ts_to`.
 
-## Related Projects
+## Part of the PFC Ecosystem
 
-| Project | Description |
-|---------|-------------|
-| [pfc-jsonl](https://github.com/ImpossibleForge/pfc-jsonl) | The core binary — compress, decompress, query |
-| [pfc-gateway](https://github.com/ImpossibleForge/pfc-gateway) | HTTP query + ingest API for .pfc archives — enables Grafana and remote access |
-| [pfc-fluentbit](https://github.com/ImpossibleForge/pfc-fluentbit) | Stream Fluent Bit logs directly to `.pfc` archives |
-| [pfc-migrate](https://github.com/ImpossibleForge/pfc-migrate) | Convert existing gzip/zstd/lz4 archives to PFC — local, S3, Azure, GCS |
-| [pfc-jsonl (PyPI)](https://pypi.org/project/pfc-jsonl/) | Python package — `pip install pfc-jsonl` |
-| [pfc-vector](https://github.com/ImpossibleForge/pfc-vector) | High-performance Rust ingest daemon for Vector.dev |
-| [pfc-otel-collector](https://github.com/ImpossibleForge/pfc-otel-collector) | OpenTelemetry OTLP/HTTP log exporter |
-| [pfc-kafka-consumer](https://github.com/ImpossibleForge/pfc-kafka-consumer) | Kafka / Redpanda consumer |
-| [pfc-telegraf](https://github.com/ImpossibleForge/pfc-telegraf) | Telegraf HTTP output plugin → PFC |
-| [pfc-grafana](https://github.com/ImpossibleForge/pfc-grafana) | Grafana data source plugin for PFC archives |
+**[→ View all PFC tools & integrations](https://github.com/ImpossibleForge/pfc-jsonl#ecosystem)**
+
+| Direct integration | Why |
+|---|---|
+| [pfc-gateway](https://github.com/ImpossibleForge/pfc-gateway) | HTTP alternative — query `.pfc` archives without a local DuckDB install |
 
 ---
 
