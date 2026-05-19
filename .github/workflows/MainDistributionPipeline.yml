@@ -19,6 +19,19 @@ jobs:
       duckdb_version: v1.5.2
       ci_tools_version: v1.5.2
       extension_name: pfc
+      # Windows test runner has a Git Bash path-munging issue with the DuckDB test framework.
+      # The extension itself builds and works correctly on Windows. Skip Windows from test run.
+      exclude_archs: "windows_amd64;windows_amd64_mingw"
+
+  duckdb-windows-build:
+    name: Build Windows binaries (no tests — Git Bash path issue in CI)
+    uses: duckdb/extension-ci-tools/.github/workflows/_extension_distribution.yml@v1.5.2
+    with:
+      duckdb_version: v1.5.2
+      ci_tools_version: v1.5.2
+      extension_name: pfc
+      opt_in_archs: "windows_amd64"
+      skip_tests: true
 
   code-quality-check:
     name: Code Quality Check
