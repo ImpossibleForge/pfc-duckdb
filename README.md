@@ -11,7 +11,7 @@ This extension changes that. Query `.pfc` files directly from DuckDB SQL. A bloc
 
 > **Requires:** The `pfc_jsonl` binary installed on your machine (Step 1 below). The extension calls it for decompression.
 >
-> **Platform:** Linux x86_64 and macOS Apple Silicon (ARM64). No native Windows binary — Windows users must use WSL2 or a Linux machine.
+> **Platform:** Linux x86_64, macOS Apple Silicon (ARM64), macOS Intel (x64), Windows x64 — all platforms supported as of v5.6.5.
 
 ```sql
 INSTALL pfc FROM community;
@@ -87,9 +87,24 @@ chmod +x /usr/local/bin/pfc_jsonl
 pfc_jsonl --help      # verify install
 ```
 
-> **macOS Intel (x64):** Binary coming soon.
+**macOS Intel (x64):**
+```bash
+curl -L https://github.com/ImpossibleForge/pfc-jsonl/releases/latest/download/pfc_jsonl-macos-x64 \
+     -o /usr/local/bin/pfc_jsonl
+chmod +x /usr/local/bin/pfc_jsonl
+pfc_jsonl --help      # verify install
+```
 
-> **Custom path:** Set `PFC_JSONL_BINARY=/path/to/pfc_jsonl` in your environment to override the default `/usr/local/bin/pfc_jsonl`.
+**Windows x64 (native — no WSL2 required):**
+```powershell
+Invoke-WebRequest `
+  -Uri "https://github.com/ImpossibleForge/pfc-jsonl/releases/latest/download/pfc_jsonl-windows-x64.exe" `
+  -OutFile "C:\bin\pfc_jsonl.exe"
+# Add C:\bin to your PATH, then:
+pfc_jsonl --help      # verify install
+```
+
+> Set `PFC_JSONL_BINARY=/path/to/pfc_jsonl` (Linux/macOS) or `$env:PFC_JSONL_BINARY="C:\bin\pfc_jsonl.exe"` (Windows PowerShell) to override the default binary path.
 
 ### Step 2 — Install the DuckDB extension
 
