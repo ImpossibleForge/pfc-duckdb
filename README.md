@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![DuckDB](https://img.shields.io/badge/DuckDB-Community%20Extension-yellow.svg)](https://duckdb.org/community_extensions/extensions/pfc)
-[![PFC-JSONL](https://img.shields.io/badge/PFC--JSONL-v3.4-green.svg)](https://github.com/ImpossibleForge/pfc-jsonl)
+[![PFC-JSONL](https://img.shields.io/badge/PFC--JSONL-green.svg)](https://github.com/ImpossibleForge/pfc-jsonl)
 [![Awesome DuckDB](https://awesome.re/mentioned-badge.svg)](https://github.com/davidgasquez/awesome-duckdb)
 
 You have compressed log archives on disk. To query them you normally decompress everything first — even if you only need one hour out of thirty days.
