@@ -271,10 +271,16 @@ pfc_jsonl compress input.jsonl output.pfc
 Binary is missing or not executable. Re-run the curl install command, or set `PFC_JSONL_BINARY=/path/to/pfc_jsonl`.
 
 **`popen() failed — could not start PFC binary subprocess`**
-The extension uses `popen()` to call the PFC binary. Windows is not supported — use WSL2 or a Linux machine.
+The extension uses `popen()` to call the PFC binary. Make sure the binary is installed and executable (see Step 1). Native Windows x64 binary is available as of v5.6.5.
 
 **`ts_from (...) must be <= ts_to (...)`**
 You passed an inverted time range. Swap the values so `ts_from` comes before `ts_to`.
+
+**`ts_from`/`ts_to` returns 0 rows even though data exists in that time range**
+This was a bug in PFC-JSONL v3.4 — the block index timestamps were off by one day, causing all block-filtered queries to return 0 rows. Upgrade to v5.6.5 to fix this.
+
+**Queries on old v3.4 archives return no results**
+PFC-JSONL v5.6.5 fully supports reading v3.4 archives via DuckDB. If queries on v3.4 files return 0 rows, upgrade the `pfc_jsonl` binary to v5.6.5.
 
 ## Part of the PFC Ecosystem
 
